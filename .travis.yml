@@ -1,0 +1,36 @@
+language: php
+
+php:
+    - '7.0'
+    - '7.1'
+    - '7.2'
+
+env:
+    matrix:
+        - TEST_SUITE=Unit Test
+
+stages:
+    - code quality
+    - test
+
+before_script:
+    - mkdir -p build/logs
+    - composer install
+
+script:
+    - vendor/bin/phpunit
+
+jobs:
+    include:
+        - stage: code quality
+          php: 7.2
+          env: TEST_SUITE=Code Quality
+          before_script: composer install
+          script: vendor/bin/phpcs && vendor/bin/phpmd src text phpmd.xml
+
+notifications:
+    email: false
+
+cache:
+    directories:
+        - $HOME/.composer/cache/files
