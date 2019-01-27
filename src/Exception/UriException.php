@@ -15,4 +15,7 @@ namespace RestClient\Exception;
  *
  * @author Jerry Anselmi <jerry.anselmi@colppy.com>
  */
-class UriException extends \RuntimeException { }
+class UriException extends \RuntimeException
+{
+
+}

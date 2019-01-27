@@ -11,7 +11,6 @@
 
 namespace RestClient\Api\Helper;
 
-
 /**
  * This interface implements methods to generate an uri.
  *

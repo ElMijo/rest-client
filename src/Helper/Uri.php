@@ -45,7 +45,9 @@ class Uri implements \RestClient\Api\Helper\UriInterface
     public static function path(string $path, array $params)
     {
         return preg_replace(
-            array_map(function ($key) { return "/\{$key\}/"; }, array_keys($params)),
+            array_map(function ($key) {
+                return "/\{$key\}/";
+            }, array_keys($params)),
             array_values($params),
             $path
         );
