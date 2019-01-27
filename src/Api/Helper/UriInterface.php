@@ -37,7 +37,7 @@ interface UriInterface
      *      - ["any" => "any-value", "any_other" => "any-other-value"]
      *  - __query__
      *      - ["name" => "Jerry Anselmi", "profession" => "developer"]
-     * 
+     *
      *
      * @param string $baseUri       Base uri with protocol and port, also you can pass part of the path.
      * @param string $path          The path to generate the uri, this value can contain params that after can be merged
@@ -64,10 +64,10 @@ interface UriInterface
      *      - ["any" => "any-value"]
      *      - ["any" => "any-value", "any_other" => "any-other-value"]
      *
-     * @param string $path          The path with the route params
-     * @param array $routeParams    List of route parameters.
+     * @param string $path  The path with the route params
+     * @param array $params List of route parameters.
      *
      * @return string
      */
-    public static function path(string $path, array $routeParams = []);
+    public static function path(string $path, array $params);
 }
