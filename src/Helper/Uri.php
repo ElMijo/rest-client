@@ -2,7 +2,7 @@
 /**
  * This file is part of the RestClient package.
  *
- *  (c) Colppy <developers@colppy.com>
+ *  (c) Jerry Anselmi <jerry.anselmi@gmail.com>
  *
  *  For the full copyright and license information, please view the LICENSE
  *  file that was distributed with this source code.
@@ -25,7 +25,16 @@ class Uri implements \RestClient\Api\Helper\UriInterface
      */
     public static function generate(string $baseUri, string $path = '', array $routeParams = [], array $query = [])
     {
-        // TODO: Implement generate() method.
+        if (filter_var($baseUri, FILTER_VALIDATE_URL) === false) {
+            throw new \RestClient\Exception\UriException("[$baseUri] is not a valid base url");
+        }
+
+        return preg_replace("/\?$/", "", sprintf(
+            "%s/%s?%s",
+            preg_replace("/\/$/", "", $baseUri),
+            preg_replace("/^\//", '', static::path($path, $routeParams)),
+            http_build_query($query)
+        ));
     }
 
     /**
@@ -35,10 +44,10 @@ class Uri implements \RestClient\Api\Helper\UriInterface
      */
     public static function path(string $path, array $params)
     {
-        return preg_replace("/^\//", '', preg_replace(
+        return preg_replace(
             array_map(function ($key) { return "/\{$key\}/"; }, array_keys($params)),
             array_values($params),
             $path
-        ));
+        );
     }
 }
